@@ -46,12 +46,12 @@ contract("Election", function(accounts) {
     })
   });
 
-  it("throws an exception for invalid candiates", function() {
+  it("vote fails for invalid candiates", function() {
     return Election.deployed().then(function(instance) {
       electionInstance = instance;
       return electionInstance.vote(99, { from: accounts[1] })
-    }).then(assert.fail).catch(function(error) {
-      assert(error.message.indexOf('revert') >= 0, "error message must contain revert");
+    }).then(function(receipt) {
+      assert.equal(receipt.receipt.status, "0x00", "failed tx");
       return electionInstance.candidates(1);
     }).then(function(candidate1) {
       var voteCount = candidate1[2];
@@ -63,7 +63,7 @@ contract("Election", function(accounts) {
     });
   });
 
-  it("throws an exception for double voting", function() {
+  it("vote fails for double voting", function() {
     return Election.deployed().then(function(instance) {
       electionInstance = instance;
       candidateId = 2;
@@ -74,8 +74,8 @@ contract("Election", function(accounts) {
       assert.equal(voteCount, 1, "accepts first vote");
       // Try to vote again
       return electionInstance.vote(candidateId, { from: accounts[1] });
-    }).then(assert.fail).catch(function(error) {
-      assert(error.message.indexOf('revert') >= 0, "error message must contain revert");
+    }).then(function(receipt) {
+      assert.equal(receipt.receipt.status, "0x00", "failed tx");
       return electionInstance.candidates(1);
     }).then(function(candidate1) {
       var voteCount = candidate1[2];
