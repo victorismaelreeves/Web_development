@@ -8,13 +8,32 @@
     <title>Each to their own Polls</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+    </style>
 
   </head>
-  <body>
+  <body style="background-color:powderblue;">
     <div class="container" style="width: 650px;">
       <div class="row">
         <div class="col-lg-12">
-          <h1 class="text-center">Results</h1>
+          <h1 class="text-center">What is your favorite Programming language?</h1>
           <hr/>
           <br/>
           <div id="loader">
@@ -55,3 +74,4 @@
     <script src="js/app.js"></script>
   </body>
 </html>
+
