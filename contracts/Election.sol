@@ -1,4 +1,4 @@
-pragma solidity 0.4.25;
+pragma solidity 0.8.6;
 
 contract Election {
     struct Candidate {
@@ -16,11 +16,15 @@ contract Election {
     );
 
     constructor () public {
-        addCandidate("Candidate 1");
-        addCandidate("Candidate 2");
+        addCandidate("Python");
+        addCandidate("Java");
+        addCandidate("Javascript");
+        addCandidate("Ruby");
+        addCandidate("c++");
+        addCandidate("Mathematica");
     }
 
-    function addCandidate (string _name) private {
+    function addCandidate (string memory _name) private {
         candidatesCount ++;
         candidates[candidatesCount] = Candidate(candidatesCount, _name, 0);
     }
